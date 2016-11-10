@@ -1,0 +1,22 @@
+{
+  "name": "adventofcode",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reubn/adventofcode.git"
+  },
+  "keywords": [
+    "adventofcode"
+  ],
+  "author": "Reuben Eggar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reubn/adventofcode/issues"
+  },
+  "homepage": "https://github.com/reubn/adventofcode#readme",
+  "devDependencies": {
+    "eslint": "^3.7.1",
+    "eslint-config-airbnb": "^12.0.0"
+  }
+}
