@@ -1,1 +1,1 @@
-adventofcode - https://http://adventofcode.com/
+adventofcode - https://adventofcode.com/
