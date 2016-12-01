@@ -17,12 +17,18 @@ export default input => {
     */
     const newDirection = (startingDirection + directionDelta + 4) % 4
 
-    // Depending on newDirection, increase x and y to get new coordinates
-    if(newDirection === 0) return {x, y: y + distance, direction: newDirection}
-    if(newDirection === 1) return {x: x + distance, y, direction: newDirection}
-    if(newDirection === 2) return {x, y: y - distance, direction: newDirection}
+    /* If newDirection is South or West (`newDirection > 1`) then we will be moving negatively along the grid
+       Combine this sign with the distance to be moved
+    */
+    const signedDistance = newDirection > 1 ? -1 : 1 * distance
 
-    return {x: x - distance, y, direction: newDirection}
+    /* Determine which axis will be affected with `newDirection % 2`. If newDirection is North or South, then we are affecting the y-axis; West or East, the x-axis
+       Mask distances: i.e. if we are not affecting the axis, set it delta to 0, otherwise set its delta to the signedDistance
+    */
+    const {x: xDelta, y: yDelta} = newDirection % 2 ? {x: signedDistance, y: 0} : {x: 0, y: signedDistance}
+
+    // Return combined deltas along with the current direction
+    return {x: x + xDelta, y: y + yDelta, direction: newDirection}
   }, {x: 0, y: 0, direction: 0})
 
   // Return the number of along movements, plus the number of up-down movements
