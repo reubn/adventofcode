@@ -25,5 +25,6 @@ export default input => {
     return {x: x - distance, y, direction: newDirection}
   }, {x: 0, y: 0, direction: 0})
 
-  return Math.abs(endX + endY)
+  // Return the number of along movements, plus the number of up-down movements
+  return Math.abs(endX) + Math.abs(endY)
 }
