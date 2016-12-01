@@ -55,6 +55,6 @@ export default input => {
     return {x: newX, y: newY, direction: newDirection, visited}
   }, {x: 0, y: 0, direction: 0, visited: new Set([])})
 
-  // Return the number of along movements, plus the number of up-down movements
+  // Return the number of along movements, plus the number of up-down movements (Manhatten Distance)
   return Math.abs(endX) + Math.abs(endY)
 }
