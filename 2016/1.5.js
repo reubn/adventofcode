@@ -20,39 +20,36 @@ export default input => {
     */
     const newDirection = (startingDirection + directionDelta + 4) % 4
 
-    // Depending on newDirection, increase x and y to get new coordinates. Also if we are moving negatively on the grid (S or W), then set blockSize to -1
-    let newCoordinates = {x, y: y + distance}
-    if(newDirection === 1) newCoordinates = {x: x + distance, y}
-    else if(newDirection === 2) newCoordinates = {x, y: y - distance, blockSize: -1}
-    else if(newDirection === 3) newCoordinates = {x: x - distance, y, blockSize: -1}
+    // If newDirection is South or West (`newDirection > 1`) then we will be moving negatively along the grid
+    const movementSign = newDirection > 1 ? -1 : 1
 
-    const {x: newX, y: newY, blockSize=1} = newCoordinates
+    // Combine this sign with the distance to be moved
+    const signedDistance = movementSign * distance
 
-    // Which axis are we moving along?
-    if(newX !== x){
-      // Moving along the x-axis
-      // For each block between start and end positions
-      for(let p = x; p !== newX; p+=blockSize){
-        const visitedCheckString = `${p},${y}`
+    /* Determine which axis will be affected with `newDirection % 2`. If newDirection is North or South, then we are affecting the y-axis; West or East, the x-axis
+       `true` means that the x-axis will be affected, `false` means that the y-axis will be affected
+    */
+    const axisAffected = newDirection % 2
 
-        // If we have found duplicate then skip, otherwise check if we have arrived at a duplicate
-        if(!visited || visited.has(visitedCheckString)) return {x: p, y, visited: null}
+    // Mask distances: i.e. if we are not affecting the axis, set it delta to 0, otherwise set its delta to the signedDistance
+    const {x: xDelta, y: yDelta} = axisAffected ? {x: signedDistance, y: 0} : {x: 0, y: signedDistance}
 
-        // We havent found a duplicate, so add these coordinates to the set
-        visited.add(visitedCheckString)
-      }
-    } else {
-      // Moving along the y-axis
-      // For each block between start and end positions
-      for(let p = y; p !== newY; p+=blockSize){
-        const visitedCheckString = `${x},${p}`
+    // Combine deltas
+    const {x: newX, y: newY} = {x: x + xDelta, y: y + yDelta}
 
-        // If we have found duplicate then skip, otherwise check if we have arrived at a duplicate
-        if(!visited || visited.has(visitedCheckString)) return {x, y: p, visited: null}
+    const startCoordinate = axisAffected ? x : y
+    const endCoordinate = axisAffected ? newX : newY
 
-        // We havent found a duplicate, so add these coordinates to the set
-        visited.add(visitedCheckString)
-      }
+    // For each block between start and end coordinates, move, and check if we have already been here
+    for(let p = startCoordinate; p !== endCoordinate; p+=movementSign){
+      // Construct check string
+      const checkString = axisAffected ? `${p},${y}` : `${x},${p}`
+
+      // If we have already found duplicate then skip, otherwise check if we have arrived at a duplicate. If we have, return coordinates and set visited to null
+      if(!visited || visited.has(checkString)) return {...(axisAffected ? {x: p, y} : {x, y: p}), visited: null}
+
+      // We haven't found a duplicate, so add these coordinates to the set
+      visited.add(checkString)
     }
 
     return {x: newX, y: newY, direction: newDirection, visited}
