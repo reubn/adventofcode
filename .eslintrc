@@ -1,4 +1,5 @@
 {
+  "parser": "babel-eslint",
   "extends": ["airbnb", "plugin:import/errors", "plugin:import/warnings"],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -58,6 +59,8 @@
           "after": true
         }
       }
-    }]
+    }],
+    "import/extensions": 0,
+    "import/newline-after-import": 0
   }
 }
