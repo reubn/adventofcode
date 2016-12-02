@@ -29,7 +29,7 @@ export default input => {
 
     // Append the resulting digit from this line to the code, and also return the current coordinates
     return {code: startingCode + keyPad[digitY][digitX], coordinates: {x: digitX, y: digitY}}
-  }, {code: '', coordinates: {x: 1, y: 1}})
+  }, {code: '', coordinates: {x: 0, y: 2}})
 
   return endCode
 }
