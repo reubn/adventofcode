@@ -13,16 +13,16 @@ export default input => {
   .reduce(({code: startingCode, coordinates: startingCoordinates}, [...directions]) => {
     // Loop over directions contained in instruction
     const {x: digitX, y: digitY} = directions.reduce(({x, y}, direction) => {
-      // Calculate new coordinates depending on which direction we have. Default case is Up.
-      let newCoordinates = {x, y: y + 1}
-      if(direction === 'D') newCoordinates = {x, y: y - 1}
-      else if(direction === 'L') newCoordinates = {x: x - 1, y}
-      else if(direction === 'R') newCoordinates = {x: x + 1, y}
-
-      const {x: newX, y: newY} = newCoordinates
+      // Look up direction and calculate the new coordinates appropriately
+      const {x: newX, y: newY} = ({
+        U: {x, y: y + 1},
+        D: {x, y: y - 1},
+        L: {x: x - 1, y},
+        R: {x: x + 1, y}
+      })[direction]
 
       // Check if there is a digit at the new coordinates. If there is then return the coordinates, otherwise return the previous coordinates (as if this letter has been ignored)
-      return keyPad[newY] && keyPad[newY][newX] ? newCoordinates : {x, y}
+      return keyPad[newY] && keyPad[newY][newX] ? {x: newX, y: newY}: {x, y}
     }, startingCoordinates)
 
     // Append the resulting digit from this line to the code, and also return the current coordinates
