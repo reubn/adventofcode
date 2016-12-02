@@ -28,6 +28,6 @@
     "eslint-config-airbnb": "^12.0.0"
   },
   "scripts": {
-    "day": "babel-node -p 'const fs = require(`fs`); require(`./${process.argv[4]}`).default(process.argv[5] || fs.readFileSync(`./${process.argv[4].split(`.`)[0]}.input`, `utf8`))'"
+    "day": "babel-node -e 'const fs = require(`fs`); console.log(require(`./${process.argv[4]}`).default(process.argv[5] || fs.readFileSync(`./${process.argv[4].split(`.`)[0]}.input`, `utf8`).trim()))'"
   }
 }
