@@ -24,7 +24,7 @@ export default input =>
       // If both letters appear the same number of times, break the tie by sorting alphabetically
       if(aCount === bCount) return aLetter.localeCompare(bLetter)
 
-      // Otherwise, sort normally, by number of times the letter appears in the strirng
+      // Otherwise, sort normally, by number of times the letter appears in the string
       return bCount - aCount
     })
     // Map to single array of letters
