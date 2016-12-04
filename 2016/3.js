@@ -10,7 +10,7 @@ export default input =>
     .split(' ')
     // Remove empty strings from array due to splitting
     .filter(s => s)
-    // Cast to intergers
+    // Cast to integers
     .map(d => +d)
     // Order side lengths accendingly
     .sort((a, b) => a - b)

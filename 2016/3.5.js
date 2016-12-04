@@ -9,7 +9,7 @@ export default input =>
     .split(' ')
     // Remove empty strings from array due to splitting
     .filter(s => s)
-    // Cast to intergers
+    // Cast to integers
     .map(d => +d)
     // Place side length into correct triangle
     .forEach((d, i) => {
