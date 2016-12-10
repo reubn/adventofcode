@@ -25,10 +25,8 @@ export default input => {
       return [...transferList, {location, lowLocation, highLocation}]
     }, [])
 
-  let transferPosition = 0
-
-  // While there are still transfers remaining
-  while(transfers.length){
+  // While there are still transfers remaining, run block, then move to the next transfer instruction. If we reach the end of the array, start back at the beginning
+  for(let transferPosition = 0; transfers.length; transferPosition = (transferPosition + 1) % transfers.length){
     // Get transfer parameters
     const {location, highLocation, lowLocation} = transfers[transferPosition]
 
@@ -53,8 +51,5 @@ export default input => {
       // Remove the transfer instruction
       transfers.splice(transferPosition, 1)
     }
-
-    // Move to the next transfer instruction. If we reach the end of the array, start back at the beginning
-    transferPosition = (transferPosition + 1) % transfers.length
   }
 }
