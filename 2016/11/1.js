@@ -13,6 +13,7 @@ export default input => {
   while(floors[floors.length - 1] !== floors.reduce((a, b) => a + b, 0)){
     // It takes `2 * (n - 1) - 1` moves to move `n` items up a floor
     moves += (2 * (floors[lowestFloor] - 1)) - 1
+
     // Increase the item count of the floor above by the number of items on this floor - moving them
     floors[lowestFloor + 1] += floors[lowestFloor]
 
