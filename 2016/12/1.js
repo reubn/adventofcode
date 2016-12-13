@@ -34,7 +34,7 @@ export default input => {
     // Jump to an instruction `y` away (positive means forward; negative means backward), but only if `x` is not zero
     if(command === 'jnz' && (Number.isInteger(x) ? x : registers[x] !== 0)) position += y
 
-    // Otherwise increases teh position as usual
+    // Otherwise increases th position as usual
     else position++
   }
 
