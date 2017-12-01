@@ -6,12 +6,12 @@ export default ([...input]) => {
   // Loop over digit array
   return input.reduce((total, digit, index, {length}) => {
     /* Add `stepsAhead` to current index
-       Bound to length of array - in order to emulate a circular list when calculating the position of the 'digit halfway around'
+       Modulus value by length of array - in order to emulate a circular list when calculating the position of the 'digit halfway around'
     */
-    const comparisonIndex = (index + stepsAhead) % length
-    const comparisonValue = input[comparisonIndex]
+    const otherDigitIndex = (index + stepsAhead) % length
+    const otherDigit = input[otherDigitIndex]
 
     // If current digit is the same as its the 'digit halfway around', add digit to cumulative total
-    return digit === comparisonValue ? (+digit + total) : total
+    return digit === otherDigit ? (+digit + total) : total
   }, 0)
 }
