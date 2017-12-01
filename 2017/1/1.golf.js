@@ -1,1 +1,1 @@
-export default a=>{let{length:b}=a,c=0,d=0;for(;d<b;d++)a[d]==a[-~d%b]&&(c+=+a[d]);return c}
+export default a=>[...a].reduce((b,c,d,{length:e})=>c==a[-~d%e]?+c+b:b,0)
