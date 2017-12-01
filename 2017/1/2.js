@@ -1,17 +1,17 @@
-export default input => {
-  // Split into Array
-  const array = input.split('')
+// Cast String to Array
+export default ([...input]) => {
+  // Calculate the number of positions ahead in the flat list
+  const stepsAhead = input.length / 2
 
-  // Calculate number of array elements ahead in infinitely long list
-  const stepsAhead = array.length / 2
+  // Loop over digit array
+  return input.reduce((total, digit, index, {length}) => {
+    /* Add `stepsAhead` to current index
+       Bound to length of array - in order to emulate a circular list when calculating the position of the 'digit halfway around'
+    */
+    const comparisonIndex = (index + stepsAhead) % length
+    const comparisonValue = input[comparisonIndex]
 
-  // Loop over array
-  return array.reduce((total, number, index, {length}) => {
-    // Calculate index for opposite element in circular list
-    const comparisonIndex = (length + index + stepsAhead) % length
-    const comparisonValue = array[comparisonIndex]
-
-    // If current number is the same as its opposite number, add number to cummulative total
-    return number === comparisonValue ? total + (+number) : total
+    // If current digit is the same as its the 'digit halfway around', add digit to cumulative total
+    return digit === comparisonValue ? (+digit + total) : total
   }, 0)
 }

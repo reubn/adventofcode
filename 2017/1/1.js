@@ -1,7 +1,8 @@
-export default input => {
-  // Split into Array
-  const array = input.split('')
-
-  // If number is equal to previous number, add number to cummulative total, assign `previous` to each number, ready for next element
-  return array.reduce(({previous, total}, number) => ({previous: number, total: number === previous ? total + (+number) : total}), {previous: array[array.length-1], total: 0}).total
-}
+// Cast String to Array
+export default ([...input]) => input.reduce(({previousDigit, total}, digit) => ({
+  previousDigit: digit,
+  total: digit === previousDigit ? (+digit + total) : total // If current digit is the same as the `previousDigit`, add digit to cumulative total
+}), {
+  previousDigit: input[input.length - 1], // Initalise with last digit of the array being the `previousDigit` for the first digit
+  total: 0
+}).total
