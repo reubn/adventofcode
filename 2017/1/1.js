@@ -1,8 +1,9 @@
-// Cast String to Array
-export default ([...input]) => input.reduce(({previousDigit, total}, digit) => ({
-  previousDigit: digit, // Set `previousDigit` to current digit
-  total: digit === previousDigit ? (+digit + total) : total // If current digit is the same as the `previousDigit`, add digit to cumulative total
-}), {
-  previousDigit: input[input.length - 1], // Initalise with last digit of the array being the `previousDigit` for the first digit
-  total: 0
-}).total
+export default input => {
+  let total = 0
+
+  for(let position = 0; position < input.length; position++) // Loop over input
+    if(input[position] === input[(position + 1) % input.length]) // If the current digit matches the next digit (wrap around for the last digit)...
+      total += +input[position] // ...add it to the total
+
+  return total
+}

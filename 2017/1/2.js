@@ -1,17 +1,10 @@
-// Cast String to Array
-export default ([...input]) => {
-  // Calculate the number of positions ahead in the flat list
-  const stepsAhead = input.length / 2
+export default input => {
+  const stepsAhead = input.length / 2 // Calculate the number of positions ahead in the flat list
+  let total = 0
 
-  // Loop over digit array
-  return input.reduce((total, digit, index, {length}) => {
-    /* Add `stepsAhead` to current index
-       Modulus value by length of array - in order to emulate a circular list when calculating the position of the 'digit halfway around'
-    */
-    const otherDigitIndex = (index + stepsAhead) % length
-    const otherDigit = input[otherDigitIndex]
+  for(let position = 0; position < input.length; position++) // Loop over input
+    if(input[position] === input[(position + stepsAhead) % input.length]) // If the current digit matches the 'digit halfway around'...
+      total += +input[position] // ...add it to the total
 
-    // If current digit is the same as its the 'digit halfway around', add digit to cumulative total
-    return digit === otherDigit ? (+digit + total) : total
-  }, 0)
+  return total
 }
