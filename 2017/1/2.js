@@ -4,7 +4,7 @@ export default input => {
 
   for(let position = 0; position < input.length; position++) // Loop over input
     if(input[position] === input[(position + stepsAhead) % input.length]) // If the current digit matches the 'digit halfway around'...
-      total += +input[position] // ...add it to the total
+      total += +input[position] // ...add it to the total, casting to number
 
   return total
 }
