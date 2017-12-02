@@ -1,7 +1,7 @@
 export default input =>
   input.split('\n') // Split into lines
     .reduce((total, line) => {
-      const parts = line.split('	') // Split by whitespace to get at numbers
+      const parts = line.split('\t') // Split by whitespace to get at numbers
 
       let lineResult = 0
       parts.find(dividend => // Loop over numbers
