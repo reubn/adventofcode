@@ -1,28 +1,9 @@
-export default input => {
-  const lines = input.split('\n')
+export default input =>
+  input.split('\n') // Split into lines
+    .reduce((total, line) => {
+      const parts = line.split(/\s/) // Split by whitespace to get at numbers
+        .reduce((array, part) => part ? [...array, +part] : array, []) // Filter out empty elements where multiple whitespace characters existed, then cast to number
 
-  let sum = 0
 
-  for(let lineIndex = 0; lineIndex < lines.length; lineIndex++){
-    const line = lines[lineIndex]
-    const parts = line.split(/\s/)
-
-    let highest = -Infinity
-    let lowest = Infinity
-
-    for(let partIndex = 0; partIndex < parts.length; partIndex++){
-      const part = parts[partIndex]
-
-      if(!part) break
-
-      const cast = +part
-
-      if(cast < lowest) lowest = cast
-      if(cast > highest) highest = cast
-    }
-
-    sum += highest - lowest
-  }
-
-  return sum
-}
+      return total + (Math.max(...parts) - Math.min(...parts)) // Add difference between highest and lowest values to cummulative total
+    }, 0)
