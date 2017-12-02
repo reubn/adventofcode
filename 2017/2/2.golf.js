@@ -1,2 +1,2 @@
 export default(a,b=0)=>(a.split`
-`.map((c,d,e,f=c.split`	`,g)=>(f.find(h=>f.find(j=>h!=j&&!(h%j)&&(g=h/j))),b+=g)),b)
+`.map(c=>(c=c.split`	`,c.map(d=>c.map(e=>d==e||d%e||(a=d/e))),b+=a)),b)
