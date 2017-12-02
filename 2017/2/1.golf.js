@@ -1,2 +1,2 @@
 export default(a,b=0)=>(a.split`
-`.map(c=>(c=c.split`	`,b+=Math.max(...c)-Math.min(...c))),b)
+`.map(c=>b+=Math.max(...c=c.split`	`)-Math.min(...c)),b)
